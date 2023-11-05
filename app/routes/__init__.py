@@ -1,0 +1,1 @@
+from . import college_route, course_route, routes, student_route
