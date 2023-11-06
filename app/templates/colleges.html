@@ -36,45 +36,88 @@
     <style>
       /* Custom Styling */
       body {
-        font-family: 'Roboto', sans-serif; /* Setting the font family */
-        background-color: #77878B; /* Setting the background color */
-        color: #B7D5D4; /* Setting the text color */
+        font-family: 'Roboto', sans-serif;
+        background-color: #77878B;
+        color: #B7D5D4;
       }
 
       .navbar {
-        background-color: #373E40; /* Customizing the navbar background color */
-        border-bottom: 1px solid #488286; /* Adding a bottom border to the navbar */
-        padding: 20px; /* Increasing padding to make the navbar more visible */
-        border-radius: 15px; /* Rounding the edges of the navbar */
+        background-color: #373E40;
+        border-bottom: 1px solid #488286;
+        padding: 20px;
+        position: fixed; /* Setting the navbar to always stay on top */
+        top: 0; /* Placing the navbar at the top */
+        width: 100%; /* Making the navbar span the entire width of the screen */
+        z-index: 1000; /* Setting a high z-index to ensure the navbar is on top of other elements */
       }
 
       .navbar-brand {
-        color: #fff; /* Changing the navbar brand text color to white */
-        padding: 10px; /* Adding padding to the navbar brand */
-        border-radius: 10px; /* Rounding the edges of the navbar brand */
+        color: #fff;
+        padding: 10px;
+        border-radius: 10px;
       }
 
       .nav-link {
-        color: #fff; /* Changing the navbar link text color to white */
-        font-size: 20px; /* Increasing the font size of navbar links */
-        font-family: 'Space Mono', monospace; /* Changing the font to Space Mono */
-        border: 2px solid transparent; /* Adding a transparent border to the nav-links */
-        border-radius: 10px; /* Rounding the edges of the nav-links */
-        padding: 10px; /* Adding padding to the nav-links */
+        color: #fff;
+        font-size: 20px;
+        font-family: 'Space Mono', monospace;
+        border: 2px solid transparent;
+        border-radius: 10px;
+        padding: 10px;
       }
 
       .nav-link:hover {
-        border-color: #fff; /* Adding a visible white border on hover */
+        border-color: #fff;
+      }
+
+      /* Custom Styles for the rows and columns */
+      .row-container {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 20px;
+      }
+
+      .column {
+        flex: 1 1 100%; /* Each column spans 12 columns in total */
+        background: #f2f2f2;
+        border: 1px solid #ddd;
+        padding: 110px;
+        text-align: left;
+        transition: all 0.3s ease; /* Transition for hover effect */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adding a drop shadow */
+      }
+      .column:hover {
+        transform: scale(1.1); /* Enlarging the column on hover */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increasing the drop shadow */
+      }
+
+      .border-image {
+        /* To set the image as a border, use the following CSS properties: */
+        background-image: url('your-image.jpg');
+        background-size: cover; /* Adjust to your needs */
+        background-position: center center; /* Adjust to your needs */
+      }
+
+      .extra-large-button {
+        /* Example of an extra-large button */
+        font-size: 24px;
+        padding: 20px 40px;
+        border-radius: 10px;
+        background-color: #488286; /* Button background color */
+        color: #fff; /* Button text color */
+        /* To use an image as a button background, you can add the following:
+        background-image: url('your-image.jpg');
+        background-size: cover;  // Adjust to your needs
+        background-position: center center;  // Adjust to your needs
+        */
+        /* You can customize other button styles like hover effects, borders, etc. here */
       }
     </style>
   </head>
   <body>
-    <!-- Your Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container">
-        <a class="navbar-brand" href="/">
-          Student Information System
-        </a>
+        <a class="navbar-brand" href="/">Student Information System</a>
         <!-- Navbar Toggler Button for mobile devices -->
         <button
           class="navbar-toggler"
@@ -104,8 +147,18 @@
       </div>
     </nav>
 
-    {% block content %} {% endblock %}
-
+    {% block content %}
+    <!-- Rows container -->
+    <div class="row-container">
+      <div class="column border-image">College of Computer Studies</div>
+      <div class="column border-image">College of Arts and Social Sciences</div>
+      <div class="column border-image">College of Education</div>
+      <div class="column border-image">College of Science and Mathematics</div>
+      <div class="column border-image">College of Health Sciences</div>
+      <div class="column border-image">College of Economics, Business, and Accoutancy</div>
+      <div class="column border-image">College of Engineering</div>
+    </div>
+    {% endblock %}
     <!-- JavaScript dependencies -->
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

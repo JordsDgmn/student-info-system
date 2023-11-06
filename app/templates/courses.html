@@ -36,45 +36,81 @@
     <style>
       /* Custom Styling */
       body {
-        font-family: 'Roboto', sans-serif; /* Setting the font family */
-        background-color: #77878B; /* Setting the background color */
-        color: #B7D5D4; /* Setting the text color */
+        font-family: 'Roboto', sans-serif;
+        background-color: #77878B;
+        color: #B7D5D4;
       }
 
       .navbar {
-        background-color: #373E40; /* Customizing the navbar background color */
-        border-bottom: 1px solid #488286; /* Adding a bottom border to the navbar */
-        padding: 20px; /* Increasing padding to make the navbar more visible */
-        border-radius: 15px; /* Rounding the edges of the navbar */
+        background-color: #373E40;
+        border-bottom: 1px solid #488286;
+        padding: 20px;
+        position: fixed; /* Setting the navbar to always stay on top */
+        top: 0; /* Placing the navbar at the top */
+        width: 100%; /* Making the navbar span the entire width of the screen */
+        z-index: 1000; /* Setting a high z-index to ensure the navbar is on top of other elements */
       }
 
       .navbar-brand {
-        color: #fff; /* Changing the navbar brand text color to white */
-        padding: 10px; /* Adding padding to the navbar brand */
-        border-radius: 10px; /* Rounding the edges of the navbar brand */
+        color: #fff;
+        padding: 10px;
+        border-radius: 10px;
       }
 
       .nav-link {
-        color: #fff; /* Changing the navbar link text color to white */
-        font-size: 20px; /* Increasing the font size of navbar links */
-        font-family: 'Space Mono', monospace; /* Changing the font to Space Mono */
-        border: 2px solid transparent; /* Adding a transparent border to the nav-links */
-        border-radius: 10px; /* Rounding the edges of the nav-links */
-        padding: 10px; /* Adding padding to the nav-links */
+        color: #fff;
+        font-size: 20px;
+        font-family: 'Space Mono', monospace;
+        border: 2px solid transparent;
+        border-radius: 10px;
+        padding: 10px;
       }
 
       .nav-link:hover {
-        border-color: #fff; /* Adding a visible white border on hover */
+        border-color: #fff;
+      }
+
+      /* Custom Styles for the rows and columns */
+      .row-container {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 20px;
+      }
+
+      .column {
+        flex: 1 1 100%; /* Each column spans 12 columns in total */
+        border: 1px solid #ddd;
+        padding: 110px;
+        text-align: left;
+      }
+
+      .border-image {
+        /* To set the image as a border, use the following CSS properties: */
+        background-image: url('your-image.jpg');
+        background-size: cover; /* Adjust to your needs */
+        background-position: center center; /* Adjust to your needs */
+      }
+
+      .extra-large-button {
+        /* Example of an extra-large button */
+        font-size: 24px;
+        padding: 20px 40px;
+        border-radius: 10px;
+        background-color: #488286; /* Button background color */
+        color: #fff; /* Button text color */
+        /* To use an image as a button background, you can add the following:
+        background-image: url('your-image.jpg');
+        background-size: cover;  // Adjust to your needs
+        background-position: center center;  // Adjust to your needs
+        */
+        /* You can customize other button styles like hover effects, borders, etc. here */
       }
     </style>
   </head>
   <body>
-    <!-- Your Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container">
-        <a class="navbar-brand" href="/">
-          Student Information System
-        </a>
+        <a class="navbar-brand" href="/">Student Information System</a>
         <!-- Navbar Toggler Button for mobile devices -->
         <button
           class="navbar-toggler"
@@ -104,8 +140,142 @@
       </div>
     </nav>
 
-    {% block content %} {% endblock %}
+    {% block content %}
+    <!-- Rows container -->
+    <div class="row-container">
+      <div class="column border-image" style="flex: 0 0 100%; width: 100%;">
+        College of Computer Studies
+        <ul>
+          <li><a href="#" style="color: #fff;">DIPLOMA IN ELECTRONICS ENGINEERING TECH (Computer Electronics)</a></li>
+          <li><a href="#" style="color: #fff;">BACHELOR OF SCIENCE IN INFORMATION SYSTEMS</a></li>
+          <li><a href="#" style="color: #fff;">BACHELOR OF SCIENCE IN INFORMATION TECHNOLOGY</a></li>
+          <li><a href="#" style="color: #fff;">DIPLOMA IN ELECTRONICS TECHNOLOGY</a></li>
+          <!-- Add more courses here -->
+        </ul>
+      </div>
+    
+      <!-- Add the remaining college columns and their respective courses -->
+    
+      <div class="column border-image" style="flex: 0 0 100%; width: 100%;">
+        College of Arts and Social Sciences
+        <ul>
+          <li><a href="#" style="color: #fff;">GENERAL EDUCATION PROGRAM</a></li>
+          <li><a href="#" style="color: #fff;">BACHELOR OF ARTS IN ENGLISH</a></li>
+          <li><a href="#" style="color: #fff;">BACHELOR OF SCIENCE IN PSYCHOLOGY</a></li>
+          <li><a href="#" style="color: #fff;">BACHELOR OF ARTS IN FILIPINO</a></li>
+          <li><a href="#" style="color: #fff;">BACHELOR OF ARTS IN HISTORY</a></li>
+          <li><a href="#" style="color: #fff;">BACHELOR OF ARTS IN POLITICAL SCIENCE</a></li>
+          <!-- Add more courses here -->
+        </ul>
+      </div>
+    
+      <!-- Add more college columns and their respective courses -->
+    
+      <!-- Add the remaining college columns and their respective courses -->
+    
+      <div class="column border-image" style="flex: 0 0 100%; width: 100%;">
+        College of Science and Mathematics
+        <ul>
+          <li><a href="#" style="color: #fff;">BACHELOR OF SCIENCE IN BIOLOGY (BOTANY)</a></li>
+          <li><a href="#" style="color: #fff;">BACHELOR OF SCIENCE IN CHEMISTRY</a></li>
+          <li><a href="#" style="color: #fff;">BACHELOR OF SCIENCE IN MATHEMATICS</a></li>
+          <li><a href="#" style="color: #fff;">BACHELOR OF SCIENCE IN PHYSICS</a></li>
+          <li><a href="#" style="color: #fff;">BACHELOR OF SCIENCE IN BIOLOGY (ZOOLOGY)</a></li>
+          <li><a href="#" style="color: #fff;">BACHELOR OF SCIENCE IN BIOLOGY (MARINE)</a></li>
+          <li><a href="#" style="color: #fff;">BACHELOR OF SCIENCE IN BIOLOGY (GENERAL)</a></li>
+          <li><a href="#" style="color: #fff;">BACHELOR OF SCIENCE IN STATISTICS</a></li>
+          <div class="column border-image" style="flex: 0 0 100%; width: 100%;">
+            College of Science and Mathematics Graduate Programs
+            <ul>
+              <li><a href="#" style="color: #fff;">MASTER OF SCIENCE IN PHYSICS</a></li>
+              <li><a href="#" style="color: #fff;">MASTER OF SCIENCE IN MARINE BIOLOGY</a></li>
+              <li><a href="#" style="color: #fff;">DOCTOR OF PHILOSOPHY IN CHEMISTRY</a></li>
+              <li><a href="#" style="color: #fff;">MASTER OF SCIENCE IN MATHEMATICS</a></li>
+              <li><a href="#" style="color: #fff;">MASTER OF SCIENCE IN CHEMISTRY</a></li>
+              <li><a href="#" style="color: #fff;">MASTER OF SCIENCE IN ENVIRONMENTAL SCIENCE</a></li>
+              <li><a href="#" style="color: #fff;">MASTER OF SCIENCE IN BIOLOGY</a></li>
+              <li><a href="#" style="color: #fff;">MASTER OF PHYSICS</a></li>
+              <li><a href="#" style="color: #fff;">DOCTOR OF PHILOSOPHY IN MATHEMATICS</a></li>
+              <li><a href="#" style="color: #fff;">MASTER OF MATHEMATICS</a></li>
+              <li><a href="#" style="color: #fff;">MASTER OF APPLIED STATISTICS</a></li>
+              <li><a href="#" style="color: #fff;">DOCTOR OF PHILOSOPHY IN PHYSICS</a></li>
+              <li><a href="#" style="color: #fff;">DOCTOR OF PHILOSOPHY MAJOR IN BIOLOGY</a></li>
+              <li><a href="#" style="color: #fff;">MASTER OF SCIENCE IN STATISTICS</a></li>
+              <!-- Add more courses here -->
+            </ul>
+          </div>
+        </ul>
+      </div>
+    
 
+    
+      <div class="column border-image" style="flex: 0 0 100%; width: 100%;">
+        School of Engineering Technology
+        <ul>
+          <li><a href="#" style="color: #fff;">DIPLOMA IN INDUSTRIAL AUTOMATION MAINTENANCE TECHOLOGY</a></li>
+          <li><a href="#" style="color: #fff;">DIPLOMA IN AUTOMOTIVE ENGINEERING TECHNOLOGY</a></li>
+          <li><a href="#" style="color: #fff;">DIPLOMA IN AUTOMOTIVE ENGINEERING TECHNOLOGY</a></li>
+          <li><a href="#" style="color: #fff;">DIPLOMA IN ELECTRICAL ENGINEERING TECHNOLOGY</a></li>
+          <li><a href="#" style="color: #fff;">DIPLOMA IN MECHANICAL ENGINEERING TECHNOLOGY</a></li>
+          <li><a href="#" style="color: #fff;">DIPLOMA IN AUTOMOTIVE ENGINEERING TECHNOLOGY</a></li>
+          <li><a href="#" style="color: #fff;">DIPLOMA IN CIVIL ENGINEERING TECHNOLOGY</a></li>
+          <li><a href="#" style="color: #fff;">DIPLOMA IN ELECTRICAL ENGINEERING TECHNOLOGY</a></li>
+          <li><a href="#" style="color: #fff;">BACHELOR OF SCIENCE IN INDUSTRIAL AUTOMATION & MECHATRONICS</a></li>
+          <li><a href="#" style="color: #fff;">DIPLOMA IN MECHANICAL ENGINEERING TECHNOLOGY</a></li>
+          <li><a href="#" style="color: #fff;">MATERIAL SCIENCE & ENGINEERING TECHNOLOGY</a></li>
+          <li><a href="#" style="color: #fff;">BACHELOR OF SCIENCE IN ENGINEERING TECHNOLOGY MANAGEMENT</a></li>
+          <li><a href="#" style="color: #fff;">DIPLOMA IN INDUSTRIAL AUTOMATION & CONTROL ENGINEERING TECHNOLOGY</a></li>
+          <li><a href="#" style="color: #fff;">DIPLOMA IN HEATING, VENTILATING, AIR-CONDITIONING & REFRIGERATION ENGINEERING TECHNOLOGY</a></li>
+          <!-- Add more courses here -->
+        </ul>
+      </div>
+    
+      <!-- Add more college columns and their respective courses -->
+    
+      <div class="column border-image" style="flex: 0 0 100%; width: 100%;">
+        College of Nursing
+        <ul>
+          <li><a href="#" style="color: #fff;">BACHELOR OF SCIENCE IN NURSING</a></li>
+          <!-- Add more courses here -->
+        </ul>
+      </div>
+    
+      <div class="column border-image" style="flex: 0 0 100%; width: 100%;">
+        School of Graduate Studies
+        <ul>
+          <li><a href="#" style="color: #fff;">MASTER OF SCIENCE IN ELECTRICAL ENGINEERING</a></li>
+          <li><a href="#" style="color: #fff;">DOCTOR IN SUSTAINABLE DEVELOPMENT STUDIES</a></li>
+          <li><a href="#" style="color: #fff;">MASTER OF SCIENCE IN INFORMATION TECHNOLOGY</a></li>
+          <li><a href="#" style="color: #fff;">MASTER OF SCIENCE IN MECHANICAL ENGINEERING</a></li>
+          <li><a href="#" style="color: #fff;">MASTER OF SCIENCE IN MATERIALS SCIENCE AND ENGINEERING</a></li>
+          <li><a href="#" style="color: #fff;">MASTER OF SCIENCE IN PHYSICAL EDUCATION</a></li>
+          <li><a href="#" style="color: #fff;">DOCTOR OF PHILOSOPHY IN SCIENCE EDUCATION</a></li>
+          <li><a href="#" style="color: #fff;">DOCTOR OF PHILOSOPHY IN FILIPINO</a></li>
+          <li><a href="#" style="color: #fff;">DOCTOR OF PHILOSOPHY IN LANGUAGE STUDIES</a></li>
+          <li><a href="#" style="color: #fff;">MASTER OF ARTS IN ENGLISH LANGUAGE STUDIES</a></li>
+          <li><a href="#" style="color: #fff;">MASTER OF ARTS IN EDUCATION (GUIDANCE and COUNSELING)</a></li>
+          <li><a href="#" style="color: #fff;">MASTER OF ARTS IN FILIPINO</a></li>
+          <li><a href="#" style="color: #fff;">MASTER OF ARTS IN SOCIOLOGY</a></li>
+          <li><a href="#" style="color: #fff;">MASTER IN BUSINESS MANAGEMENT</a></li>
+          <li><a href="#" style="color: #fff;">MASTER IN HISTORY</a></li>
+          <li><a href="#" style="color: #fff;">MASTER IN SUSTAINABLE DEVELOPMENT STUDIES</a></li>
+          <li><a href="#" style="color: #fff;">MASTER IN INFORMATION TECHNOLOGY</a></li>
+          <li><a href="#" style="color: #fff;">MASTER OF ENGINEERING</a></li>
+          <li><a href="#" style="color: #fff;">Master of Public Administration</a></li>
+          <li><a href="#" style="color: #fff;">MASTER OF SCIENCE IN COMPUTER APPLICATIONS</a></li>
+          <li><a href="#" style="color: #fff;">MASTER OF SCIENCE IN CIVIL ENGINEERING</a></li>
+          <li><a href="#" style="color: #fff;">DOCTOR OF ENGINEERING</a></li>
+          <li><a href="#" style="color: #fff;">MASTER OF SCIENCE EDUCATION</a></li>
+          <li><a href="#" style="color: #fff;">MASTER OF SCIENCE IN COMPUTER SCIENCE</a></li>
+          <!-- Add more courses here -->
+        </ul>
+      </div>
+    </div>
+    {% endblock %}
+    
+    
+    
+    
     <!-- JavaScript dependencies -->
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
