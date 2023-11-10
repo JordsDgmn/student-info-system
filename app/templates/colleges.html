@@ -151,14 +151,32 @@
     {% block content %}
     <!-- Rows container -->
     <div class="row-container">
-      <div class="column border-image">College of Computer Studies</div>
-      <div class="column border-image">College of Arts and Social Sciences</div>
-      <div class="column border-image">College of Education</div>
-      <div class="column border-image">College of Science and Mathematics</div>
-      <div class="column border-image">College of Health Sciences</div>
-      <div class="column border-image">College of Economics, Business, and Accoutancy</div>
-      <div class="column border-image">College of Engineering</div>
+      <div class="column border-image" onclick="toggleTable('college1')">College of Computer Studies</div>
+      <div class="column border-image" onclick="toggleTable('college2')">College of Arts and Social Sciences</div>
+      <div class="column border-image" onclick="toggleTable('college3')">College of Education</div>
+      <div class="column border-image" onclick="toggleTable('college4')">College of Science and Mathematics</div>
+      <div class="column border-image" onclick="toggleTable('college5')">College of Health Sciences</div>
+      <div class="column border-image" onclick="toggleTable('college6')">College of Economics, Business, and Accoutancy</div>
+      <div class="column border-image" onclick="toggleTable('college7')">College of Engineering</div>
     </div>
+    <div id="college1" class="d-none">
+      <table id="college1Table" class="table" style="width:100%">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Course</th>
+            <th>Year</th>
+            <th>Gender</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Populate with data from the database -->
+        </tbody>
+      </table>
+    </div>
+    <!-- Add similar table elements for other colleges -->
     {% endblock %}
     <!-- JavaScript dependencies -->
     <script
@@ -171,6 +189,12 @@
       integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
       crossorigin="anonymous"
     ></script>
+    <script
+      src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"
+    ></script>
+    <script
+    src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"
+  ></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script
       type="text/javascript"

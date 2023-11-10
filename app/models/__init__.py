@@ -1,0 +1,1 @@
+from . import collegeModel, courseModel, studentModel

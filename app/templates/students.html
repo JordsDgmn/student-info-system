@@ -16,6 +16,8 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" />
+
     <!-- Your CSS Stylesheets -->
     <link
       rel="stylesheet"
@@ -104,7 +106,98 @@
       </div>
     </nav>
 
-    {% block content %} {% endblock %}
+    {% block content %}
+    <!-- Bootstrap 5 Table -->
+    <div class="container mt-5">
+      <input type="text" id="searchId" placeholder="Search ID" />
+      <input type="text" id="searchFirstName" placeholder="Search First Name" />
+      <input type="text" id="searchLastName" placeholder="Search Last Name" />
+      <select id="searchCollege">
+        <option value="">All Colleges</option>
+        <!-- Populate dropdown options here -->
+        <option value="CASS">CASS</option>
+        <option value="CCS">CCS</option>
+        <option value="CEBA">CEBA</option>
+        <option value="CED">CED</option>
+        <option value="CHS">CHS</option>
+        <option value="COET">COET</option>
+        <option value="CSM">CSM</option>
+      </select>
+      <select id="searchCourse">
+        <option value="">All Courses</option>
+        <!-- Populate dropdown options here -->
+        <option value="BAE">BAE(CASS)</option>
+        <option value="BAF">BAF(CASS)</option>
+        <option value="BAH">BAH(CASS)</option>
+        <option value="BAP">BAP(CASS)</option>
+        <option value="BAPS">BAPS(CASS)</option>
+        <option value="BSB">BSB(CSM)</option>
+        <option value="BSM">BSM(CSM)</option>
+        <option value="BSBA-BE">BSBA-BE(CEBA)</option>
+        <option value="BSBA-E">BSBA-E(CEBA)</option>
+        <option value="BSBA-EM">BSBA-EM(CEBA)</option>
+        <option value="BSC">BSC(CSM)</option>
+        <option value="BSCE">BSCE(COET)</option>
+        <option value="BSChE">BSChE(COET)</option>
+        <option value="BSCS">BSCS(CCS)</option>
+        <option value="BSE-B">BSE-B(CED)</option>
+        <option value="BSE-C">BSE-C(CED)</option>
+        <option value="BSIE">BSIE(CED)</option>
+        <option value="BSIS">BSIS(CCS)</option>
+        <option value="BSIT">BSIT(CCS)</option>
+        <option value="BSN">BSN(CHS)</option>
+        <option value="BSP">BSP(CASS)</option>
+        
+        
+      </select>
+      <select id="searchYear">
+        <option value="">All Year Levels</option>
+        <!-- Populate dropdown options here -->
+        <option value="1st Year">1st Year</option>
+        <option value="2nd Year">2nd Year</option>
+        <option value="3rd Year">3rd Year</option>
+        <option value="4th Year">4th Year</option>
+      </select>
+
+      <select id="searchGender">
+        <option value="">All Genders</option>
+        <!-- Populate dropdown options here -->
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+
+      </select>
+      
+      <table id="studentsTable" class="table table-striped table-hover" style="width:100%">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>College</th>
+            <th>Course</th>
+            <th>Year</th>
+            <th>Gender</th>
+            <th>Profile Pic</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Python code to fetch data from MySQL and populate the table -->
+          {% for student in students %}
+          <tr>
+            <td>{{ student.id }}</td>
+            <td>{{ student.firstname }}</td>
+            <td>{{ student.lastname }}</td>
+            <td>{{ student.college_code }}</td>
+            <td>{{ student.course_code }}</td>
+            <td>{{ student.year }}</td>
+            <td>{{ student.gender }}</td>
+            <td>{{ student.profile_pic_url }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endblock %}
 
     <!-- JavaScript dependencies -->
     <script
@@ -122,5 +215,39 @@
       type="text/javascript"
       src="{{ url_for('static', filename='app.js') }}"
     ></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('#studentsTable').DataTable();
+        var table = $('#studentsTable').DataTable();
+
+        // Search functionality for each column
+        $('#searchId').on('keyup', function() {
+          table.column(0).search(this.value).draw();
+        });
+        $('#searchFirstName').on('keyup', function() {
+          table.column(1).search(this.value).draw();
+        });
+        $('#searchLastName').on('keyup', function() {
+          table.column(2).search(this.value).draw();
+        });
+        $('#searchCollege').on('change', function() {
+          table.column(3).search(this.value).draw();
+        });
+        $('#searchCourse').on('change', function() {
+          table.column(4).search(this.value).draw();
+        });
+        $('#searchYear').on('change', function() {
+          table.column(5).search(this.value).draw();
+        });
+        $('#searchGender').on('change', function() {
+          table
+            .column(6)
+            .search('\\b' + this.value + '\\b', true, false)
+            .draw();
+        });
+      });
+    </script>
   </body>
 </html>
