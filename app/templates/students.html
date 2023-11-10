@@ -68,6 +68,8 @@
       .nav-link:hover {
         border-color: #fff; /* Adding a visible white border on hover */
       }
+
+      
     </style>
   </head>
   <body>
@@ -197,6 +199,141 @@
         </tbody>
       </table>
     </div>
+  
+    <!-- Add, Edit, Delete buttons -->
+    <div class="ps-auto mt-5 d-grid gap-5 d-md-flex justify-content-md-center">
+      <button class="btn btn-outline-light btn-lg" onclick="showAddRow()" style="width: 350px;">Add</button>
+      <button class="btn btn-outline-light btn-lg" onclick="showEditTable()" style="width: 350px;">Edit</button>
+      <button class="btn btn-danger btn-lg" onclick="showDeleteTable()" style="width: 350px;">Delete</button>
+    </div>
+    
+    
+
+    <!-- Add Row -->
+    <div id="addRow" style="display: none;">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>College</th>
+            <th>Course</th>
+            <th>Year</th>
+            <th>Gender</th>
+            <th>Profile Pic</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td contenteditable="true"></td>
+            <td contenteditable="true"></td>
+            <td>
+              <select>
+                <option value="CASS">CASS</option>
+                <option value="CCS">CCS</option>
+                <option value="CEBA">CEBA</option>
+                <option value="CED">CED</option>
+                <option value="CHS">CHS</option>
+                <option value="COET">COET</option>
+                <option value="CSM">CSM</option>
+                <!-- ... (populate with college options) ... -->
+              </select>
+            </td>
+            <td>
+              <select>
+                <!-- ... (populate with course options) ... -->
+                <option value="BAE">BAE(CASS)</option>
+                <option value="BAF">BAF(CASS)</option>
+                <option value="BAH">BAH(CASS)</option>
+                <option value="BAP">BAP(CASS)</option>
+                <option value="BAPS">BAPS(CASS)</option>
+                <option value="BSB">BSB(CSM)</option>
+                <option value="BSM">BSM(CSM)</option>
+                <option value="BSBA-BE">BSBA-BE(CEBA)</option>
+                <option value="BSBA-E">BSBA-E(CEBA)</option>
+                <option value="BSBA-EM">BSBA-EM(CEBA)</option>
+                <option value="BSC">BSC(CSM)</option>
+                <option value="BSCE">BSCE(COET)</option>
+                <option value="BSChE">BSChE(COET)</option>
+                <option value="BSCS">BSCS(CCS)</option>
+                <option value="BSE-B">BSE-B(CED)</option>
+                <option value="BSE-C">BSE-C(CED)</option>
+                <option value="BSIE">BSIE(CED)</option>
+                <option value="BSIS">BSIS(CCS)</option>
+                <option value="BSIT">BSIT(CCS)</option>
+                <option value="BSN">BSN(CHS)</option>
+                <option value="BSP">BSP(CASS)</option>
+                
+              </select>
+            </td>
+            <td>
+              <select>
+                <!-- ... (populate with year options) ... -->
+                <option value="1st Year">1st Year</option>
+                <option value="2nd Year">2nd Year</option>
+                <option value="3rd Year">3rd Year</option>
+                <option value="4th Year">4th Year</option>
+              </select>
+            </td>
+            <td>
+              <select>
+                <!-- ... (populate with gender options) ... -->
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </td>
+            <td contenteditable="true"></td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-success px-4 py-2" onclick="addStudent()" style="width: 350px;" >Save</button>
+    
+    </div>
+    <!-- Delete Table -->   
+    <div id="deleteTable" style="display: none;">
+      <input type="text" id="deleteSearch" placeholder="Search for student to delete" />
+      <table class="table">
+        <!-- ... (populate table with existing students) ... -->
+        <thead>
+          <tr>
+              <th>ID</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>College</th>
+              <th>Course</th>
+              <th>Year</th>
+              <th>Gender</th>
+              <th>Profile Pic</th>
+              <th>Delete</th>
+          </tr>
+      </thead>
+      <tbody>
+          <!-- Python code to fetch data from MySQL and populate the table -->
+          {% for student in students %}
+          <tr>
+              <td>{{ student.id }}</td>
+              <td>{{ student.firstname }}</td>
+              <td>{{ student.lastname }}</td>
+              <td>{{ student.college_code }}</td>
+              <td>{{ student.course_code }}</td>
+              <td>{{ student.year }}</td>
+              <td>{{ student.gender }}</td>
+              <td>{{ student.profile_pic_url }}</td>
+              <td><button class="btn btn-danger" onclick="confirmDelete('{{ student.id }}')">Delete</button></td>
+          </tr>
+          {% endfor %}
+      </tbody>
+      </table>
+      <button class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+    </div>
+    <!-- Action Log -->
+    <div id="actionLog" class="bg-secondary text-white p-3 mt-3" style="max-height: 200px; overflow-y: auto;"></div>
+
+
+
+          
     {% endblock %}
 
     <!-- JavaScript dependencies -->
@@ -217,6 +354,7 @@
     ></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    
     <script>
       $(document).ready(function() {
         $('#studentsTable').DataTable();
@@ -249,5 +387,118 @@
         });
       });
     </script>
+    <script>
+        // Additional JavaScript functions for the requested features
+        function showAddRow() {
+          $('#addRow').toggle();
+        }
+
+        function showDeleteTable() {
+          $('#deleteTable').toggle();
+        }
+
+        function showEditTable() {
+          // Implement similar logic as delete for the edit table
+        }
+
+        function addStudent() {
+          // Get the values from the add row
+          var firstName = $('#addRow tbody tr td:nth-child(2)').text().trim();
+          var lastName = $('#addRow tbody tr td:nth-child(3)').text().trim();
+          var college = $('#addRow tbody tr td:nth-child(4) select').val();
+          var course = $('#addRow tbody tr td:nth-child(5) select').val();
+          var year = $('#addRow tbody tr td:nth-child(6) select').val();
+          var gender = $('#addRow tbody tr td:nth-child(7) select').val();
+          var profilePic = $('#addRow tbody tr td:nth-child(8)').text().trim();
+
+          // Implement logic to send data to the server and add a student
+          $.ajax({
+            url: '/add_student', // Adjust the URL based on your Flask route
+            type: 'POST',
+            data: {
+              firstName: firstName,
+              lastName: lastName,
+              college: college,
+              course: course,
+              year: year,
+              gender: gender,
+              profilePic: profilePic
+            },
+            success: function(response) {
+              // Update the table or show a message based on the server response
+              // For now, log a simple message to the console
+              console.log(response);
+
+              // Add a log entry to the action log
+              $('#actionLog').append('<p>Added student: ' + firstName + ' ' + lastName + '</p>');
+            },
+            error: function(error) {
+              console.error('Error adding student:', error);
+            }
+          });
+
+          // Hide the add row after adding the student
+          $('#addRow').hide();
+        }
+
+        function confirmDelete(studentId, studentFirstName, studentLastName) {
+          var confirmDelete = confirm("Are you sure you want to delete " + studentFirstName + " " + studentLastName + "?");
+          if (confirmDelete) {
+            // Implement logic to delete the student
+            deleteStudent(studentId, studentFirstName, studentLastName);
+          } else {
+            // Log cancellation or do nothing
+            console.log('Deletion canceled');
+          }
+    
+
+          // Add a log entry to the action log
+          $('#actionLog').append('<p>Confirmed deletion</p>');
+        }
+
+        function editStudent(studentId, newFirstName, newLastName, newCollege, newCourse, newYear, newGender, newProfilePic) {
+          // Implement logic to edit the selected student
+          // For now, log a simple message to the console
+          console.log('Edit student with ID:', studentId);
+          console.log('New values:', newFirstName, newLastName, newCollege, newCourse, newYear, newGender, newProfilePic);
+      
+          // You can add additional logic to send data to the server and update the student
+        }        // ... (you can add similar functions for edit functionality)
+        function deleteStudent(studentId, studentFirstName, studentLastName) {
+          // Implement logic to delete the selected student
+          // For now, log a simple message to the console
+          console.log('Delete student with ID:', studentId);
+          console.log('Student name:', studentFirstName, studentLastName);
+      
+          // Add a log entry to the action log
+          $('#actionLog').append('<p>Deleted student: ' + studentFirstName + ' ' + studentLastName + '</p>');
+      
+          // You may need to make an AJAX call to the server to delete the student permanently
+          $.ajax({
+              url: '/delete_student', // Adjust the URL based on your Flask route
+              type: 'POST',
+              data: {
+                  studentId: studentId
+              },
+              success: function (response) {
+                  // Update the table or show a message based on the server response
+                  // For now, log a simple message to the console
+                  console.log(response);
+              },
+              error: function (error) {
+                  console.error('Error deleting student:', error);
+              }
+          });
+      
+          // Update the table or UI accordingly (you can do this part after a successful server response)
+        }
+        function showEditTable() {
+          $('#editTable').toggle(); // Assuming you have an element with the id 'editTable' for editing.
+        }
+        
+
+        
+    </script>
+    
   </body>
 </html>
